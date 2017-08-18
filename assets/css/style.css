@@ -1,3 +1,16 @@
+body {
+	background-color: #c6efd7;
+}
+
+ul li:hover {
+	background-color: blue;
+}
+
+ul li {
+	/*background-color: #bfbfbf;*/
+	list-style: none;
+}
+
 .container {
 	margin: auto;
 	width: 70%;
@@ -11,13 +24,4 @@
 
 .dynamic-section {
 	background-color: #bfbfbf;
-}
-
-ul li:hover {
-	background-color: blue;
-}
-
-ul li {
-	/*background-color: #bfbfbf;*/
-	list-style: none;
 }

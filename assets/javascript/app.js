@@ -4,9 +4,8 @@ $(document).ready(function() {
 var correctAnswers = 0;
 var incorrectAnswers = 0;
 var questionsUnanswered = 0;
-var time = 30;
+var time;
 var intervalId;
-var tempIndex = 0;
 var questionIndex = 0; //to know which question we should render
 var questions = [
   {
@@ -28,6 +27,20 @@ var questions = [
     ]
   }
 ]; 
+
+gameStart();
+
+//start game
+function gameStart () {
+  var a = $('<button>');
+  a.addClass('game-start');
+  a.text('Start');
+  $('.dynamic-section').append(a);
+
+  $('.game-start').on('click', function() {
+    renderQuestion();
+  });
+}
 
 //display end game screen
 function displayEndGame () {
@@ -61,6 +74,16 @@ function displayEndGame () {
   f.addClass('start-over');
   f.text('Start Over?');
   $('.dynamic-section').append(f);
+
+  $('.start-over').on('click', function() {
+  //reset game
+  correctAnswers = 0;
+  incorrectAnswers = 0;
+  questionsUnanswered = 0;
+  time = 30;
+  questionIndex = 0;
+  renderQuestion();
+  });
 }
 
 //display section if correct answer is selected
@@ -96,7 +119,25 @@ function displayWrongAnswer () {
   $('.dynamic-section').append(c);
 }
 
-renderQuestion();
+function displayOutOfTime () {
+  $('.dynamic-section').empty();
+
+  var a = $('<p>');
+  a.addClass('out-of-time');
+  a.text('Out Of Time!')
+  $('.dynamic-section').append(a);
+
+  var b = $('<p>');
+  b.addClass('the-correct-answer');
+  b.text('The Correct Answer Was: ' + questions[questionIndex].correctAnswer);
+  $('.dynamic-section').append(b);
+
+  var c = $('<img>');
+  c.attr('src', 'http://www.phonebrain.org.uk/assets/img/quiz/correct-male.png')  
+  $('.dynamic-section').append(c);
+}
+
+// renderQuestion();
 
 function renderQuestion () {
   timer();
@@ -199,6 +240,10 @@ function timer () {
   $('.timer').html('Time Remaining: ' + 30);
   time = 30; //reset time
   intervalId = setInterval(function(){count(); }, 1000);
+
+  // if (time = 0) {
+  //   console.log('you\'re out of time');
+  // }
 }
 
 function count() {
@@ -206,15 +251,16 @@ function count() {
     time--;
     $('.timer').html('Time Remaining: ' + time);
   }
+  //if time runs out
+  if (time === 0) {
+    clearInterval(intervalId); //stop timer
+    questionsUnanswered++;
+    console.log('Correct Answers: ' + correctAnswers);
+    displayOutOfTime();
+    questionIndex++;
+    //check if any questions remain
+    setTimeout(function(){endGame(); }, 2000);
+  }
 }
-
-//generate random number not including one already used
-function generateRandom(min, max) {
-  var num = Math.floor(Math.random() * (max - min + 1)) + min;
-  return (num === 2) ? generateRandom(min, max) : num;
-}
-
-var test = generateRandom(0, 3)
-
 
 });
