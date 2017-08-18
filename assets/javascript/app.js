@@ -29,6 +29,73 @@ var questions = [
   }
 ]; 
 
+//display end game screen
+function displayEndGame () {
+  $('.dynamic-section').empty();
+
+  var a = $('<p>');
+  a.addClass('done');
+  a.text('All done, here\'s how you did!')
+  $('.dynamic-section').append(a);
+
+  var b = $('<ul>');
+  b.addClass('results-section');
+  $('.dynamic-section').append(b);
+
+  var c = $('<li>');
+  c.addClass('results');
+  c.text('Correct Answers: ' + correctAnswers);
+  $('.results-section').append(c);
+  
+  var d = $('<li>');
+  d.addClass('results');
+  d.text('Incorrect Answers: ' + incorrectAnswers);
+  $('.results-section').append(d);
+  
+  var e = $('<li>');
+  e.addClass('results');
+  e.text('Unanswered: ' + questionsUnanswered);
+  $('.results-section').append(e);
+
+  var f = $('<button>');
+  f.addClass('start-over');
+  f.text('Start Over?');
+  $('.dynamic-section').append(f);
+}
+
+//display section if correct answer is selected
+function displayCorrectAnswer () {
+  $('.dynamic-section').empty();
+
+  var a = $('<p>');
+  a.addClass('correct-answer');
+  a.text('Correct!')
+  $('.dynamic-section').append(a);
+
+  var c = $('<img>');
+  c.attr('src', 'http://www.phonebrain.org.uk/assets/img/quiz/correct-male.png')  
+  $('.dynamic-section').append(c);
+}
+
+//display section if wrong answer is selected
+function displayWrongAnswer () {
+  $('.dynamic-section').empty();
+
+  var a = $('<p>');
+  a.addClass('wrong');
+  a.text('Nope!')
+  $('.dynamic-section').append(a);
+
+  var b = $('<p>');
+  b.addClass('the-correct-answer');
+  b.text('The Correct Answer Was: ' + questions[questionIndex].correctAnswer);
+  $('.dynamic-section').append(b);
+
+  var c = $('<img>');
+  c.attr('src', 'http://www.phonebrain.org.uk/assets/img/quiz/correct-male.png')  
+  $('.dynamic-section').append(c);
+}
+
 renderQuestion();
 
 function renderQuestion () {
@@ -40,9 +107,18 @@ function renderQuestion () {
   newArray.push(questions[questionIndex].incorrectAnswer[2]);
   newArray = shuffle(newArray); 
 
-  $('#question').text(questions[questionIndex].question);
+  // $('.answer-section').empty(); //clear section before appending
+ 
+  $('.dynamic-section').empty();//clear section before appending
+  //create section for questions and answers to be appended
+  var b = $('<p>');
+  b.attr('id','question');
+  $('.dynamic-section').append(b);
 
-  $('.answer-section').empty(); //clear section before appending
+  var c = $('<ul>');
+  c.addClass('answer-section');
+  $('.dynamic-section').append(c);
+  $('#question').text(questions[questionIndex].question);
 
   for (var i = 0; i < newArray.length; i++) {
 
@@ -68,18 +144,22 @@ function renderQuestion () {
   $('.answer-section li').on('click', function() {
   //check if correct answer was clicked
     if ($(this).attr('class') === 'correctAnswer') {
+      clearInterval(intervalId); //stop timer
       correctAnswers++;
       console.log('Correct Answers: ' + correctAnswers);
+      displayCorrectAnswer();
       questionIndex++;
       //check if any questions remain
-      setTimeout(function(){endGame(); }, 1000);
+      setTimeout(function(){endGame(); }, 2000);
     }
     else {
+      clearInterval(intervalId); //stop timer
       incorrectAnswers++;
       console.log('Incorrect Answers: ' + incorrectAnswers);
+      displayWrongAnswer();
       questionIndex++;
       //check if any questions remain
-      setTimeout(function(){endGame(); }, 1000);
+      setTimeout(function(){endGame(); }, 2000);
     }
   });
 }
@@ -87,6 +167,7 @@ function renderQuestion () {
 function endGame () {
   if (questionIndex >= questions.length) {
     console.log ("end of game screen with results");
+    displayEndGame();
   }
   else {
     renderQuestion();
@@ -116,7 +197,6 @@ function shuffle(array) {
 //timer countdown from 30 at each question
 function timer () {
   $('.timer').html('Time Remaining: ' + 30);
-  clearInterval(intervalId); //clear interval before restarting
   time = 30; //reset time
   intervalId = setInterval(function(){count(); }, 1000);
 }
