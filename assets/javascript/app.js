@@ -28,17 +28,17 @@ var questions = [
   }
 ]; 
 
-
-
 //dynamically create questions from array
 function renderQuestions () {
 
+  $('#question').html(questions[0].question);
+  
+  //randomize the location of the correct answer
   correctIndex = Math.floor(Math.random() * 4);
   console.log('correctIndex: ' + correctIndex);
-
-  // console.log(questions[0].correctAnswer);
   $('.answerSection li').eq(correctIndex).html(questions[0].correctAnswer);
 
+  //generate incorrect answers
   for (var i = 0; i < questions[0].incorrectAnswer.length; i++) {
     if (i === correctIndex) {
       console.log('oops, this index is in use');
@@ -46,6 +46,7 @@ function renderQuestions () {
       console.log(tempIndex);
       $('.answerSection li').eq(tempIndex).html(questions[0].incorrectAnswer[i]);
       console.log(questions[0].incorrectAnswer[i]);
+      //increment index so future answers are properly positioned
       tempIndex++;
     }
     else{
@@ -75,7 +76,7 @@ function count() {
   }
 }
 
-//click function for as
+//click function for
 $('.answerSection li').on('click', function() {
   console.log('you clicked on ' + this);
   });
@@ -88,8 +89,5 @@ function generateRandom(min, max) {
 
 var test = generateRandom(0, 3)
 // console.log(test);
-
-var correctIndex = Math.floor(Math.random() * 4);
-// console.log(correctIndex);
 
 });
