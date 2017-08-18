@@ -3,7 +3,7 @@ $(document).ready(function() {
 //Variables-----------------------------
 var correctAnswers = 0;
 var incorrectAnswers = 0;
-var questionsUnanswers = 0;
+var questionsUnanswered = 0;
 var time = 30;
 var tempIndex = 0;
 var questionIndex = 0; //to know which question we should render
@@ -27,6 +27,8 @@ var questions = [
     ]
   }
 ]; 
+
+renderQuestion();
 
 function renderQuestion () {
   var newArray = [];
@@ -60,26 +62,33 @@ function renderQuestion () {
       $('.answer-section').append(a);
     }
   }
-
+  //add on click event to list items, kept inside function in order for appended items to get click event
   $('.answer-section li').on('click', function() {
   //check if correct answer was clicked
     if ($(this).attr('class') === 'correctAnswer') {
       correctAnswers++;
       console.log('Correct Answers: ' + correctAnswers);
       questionIndex++;
-      renderQuestion();
+      if (questionIndex >= questions.length) {
+        console.log ("end of game screen");
+      }
+      else {
+        renderQuestion();
+      } 
     }
     else {
       incorrectAnswers++;
       console.log('Incorrect Answers: ' + incorrectAnswers);
       questionIndex++;
-      renderQuestion(); 
+      if (questionIndex >= questions.length) {
+        console.log ("end of game screen");
+      }
+      else {
+        renderQuestion();
+      } 
     }
   });
-
 }
-
-renderQuestion();
 
 //shuffle array function
 function shuffle(array) {
@@ -101,42 +110,6 @@ function shuffle(array) {
   return array;
 }
 
-//dynamically create questions from array
-// function renderQuestion () {
-
-//   $('#question').html(questions[questionIndex].question);
-  
-//   //randomize the location of the correct answer
-//   correctIndex = Math.floor(Math.random() * 4);
-//   console.log('correctIndex: ' + correctIndex);
-
-//   $('.answer-section li').eq(correctIndex).html(questions[questionIndex].correctAnswer);
-//   $('.answer-section li').eq(correctIndex).addClass("correctAnswer");
-
-//   //generate incorrect answers
-//   for (var i = 0; i < questions[questionIndex].incorrectAnswer.length; i++) {
-//     //checks if correct answer is in the same index and skips ahead 1 index
-//     if (i === correctIndex) {
-//       tempIndex++;
-//       console.log(tempIndex);
-//       $('.answer-section li').eq(tempIndex).html(questions[questionIndex].incorrectAnswer[i]);
-//       console.log(questions[questionIndex].incorrectAnswer[i]);
-//       //increment index so future answers are properly positioned
-//       tempIndex++;
-//     }
-//     else{
-//       console.log(questions[questionIndex].incorrectAnswer[i]);
-//       $('.answer-section li').eq(tempIndex).html(questions[questionIndex].incorrectAnswer[i]);
-//       tempIndex++;
-//       console.log(tempIndex);
-//     }
-//   }
-// }
-
-// $('.answer-section li').eq(0).html('testing this out');
-
-// renderQuestion();
-
 timer();
 
 //timer countdown from 30 at each question
@@ -151,8 +124,6 @@ function count() {
   }
 }
 
-//on click function for answers
-
 
 //generate random number not including one already used
 function generateRandom(min, max) {
@@ -161,6 +132,6 @@ function generateRandom(min, max) {
 }
 
 var test = generateRandom(0, 3)
-// console.log(test);
+
 
 });
