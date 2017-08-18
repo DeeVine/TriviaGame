@@ -6,7 +6,7 @@ var incorrectAnswers = 0;
 var questionsUnanswers = 0;
 var time = 30;
 var tempIndex = 0;
-
+var questionIndex = 0; //to know which question we should render
 var questions = [
   {
     'question': 'This is question #1',
@@ -29,19 +29,21 @@ var questions = [
 ]; 
 
 //dynamically create questions from array
-function renderQuestions () {
+function renderQuestion () {
 
   $('#question').html(questions[0].question);
   
   //randomize the location of the correct answer
   correctIndex = Math.floor(Math.random() * 4);
   console.log('correctIndex: ' + correctIndex);
+
   $('.answerSection li').eq(correctIndex).html(questions[0].correctAnswer);
+  $('.answerSection li').eq(correctIndex).addClass("correctAnswer");
 
   //generate incorrect answers
   for (var i = 0; i < questions[0].incorrectAnswer.length; i++) {
+    //checks if correct answer is in the same index and skips ahead 1 index
     if (i === correctIndex) {
-      console.log('oops, this index is in use');
       tempIndex++;
       console.log(tempIndex);
       $('.answerSection li').eq(tempIndex).html(questions[0].incorrectAnswer[i]);
@@ -60,7 +62,7 @@ function renderQuestions () {
 
 // $('.answerSection li').eq(0).html('testing this out');
 
-renderQuestions();
+renderQuestion();
 
 timer();
 
@@ -76,10 +78,18 @@ function count() {
   }
 }
 
-//click function for
+//on click function for answers
 $('.answerSection li').on('click', function() {
-  console.log('you clicked on ' + this);
-  });
+  //check if correct answer was clicked
+  if ($(this).attr('class') === 'answerList correctAnswer') {
+    correctAnswers++;
+    console.log('Correct Answers: ' + correctAnswers);  
+  }
+  else {
+    incorrectAnswers++;
+    console.log('Incorrect Answers: ' + incorrectAnswers);
+  }
+});
 
 //generate random number not including one already used
 function generateRandom(min, max) {
