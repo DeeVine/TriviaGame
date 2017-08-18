@@ -5,6 +5,7 @@ var correctAnswers = 0;
 var incorrectAnswers = 0;
 var questionsUnanswers = 0;
 var time = 30;
+var tempIndex = 0;
 
 var questions = [
   {
@@ -27,17 +28,36 @@ var questions = [
   }
 ]; 
 
+
+
 //dynamically create questions from array
 function renderQuestions () {
 
-  console.log(questions[0].correctAnswer);
+  correctIndex = Math.floor(Math.random() * 4);
+  console.log('correctIndex: ' + correctIndex);
+
+  // console.log(questions[0].correctAnswer);
+  $('.answerSection li').eq(correctIndex).html(questions[0].correctAnswer);
 
   for (var i = 0; i < questions[0].incorrectAnswer.length; i++) {
-  console.log(questions[0].incorrectAnswer[i]);
+    if (i === correctIndex) {
+      console.log('oops, this index is in use');
+      tempIndex++;
+      console.log(tempIndex);
+      $('.answerSection li').eq(tempIndex).html(questions[0].incorrectAnswer[i]);
+      console.log(questions[0].incorrectAnswer[i]);
+      tempIndex++;
+    }
+    else{
+      console.log(questions[0].incorrectAnswer[i]);
+      $('.answerSection li').eq(tempIndex).html(questions[0].incorrectAnswer[i]);
+      tempIndex++;
+      console.log(tempIndex);
+    }
   }
 }
 
-$('.answerSection li').eq(0).html('testing this out');
+// $('.answerSection li').eq(0).html('testing this out');
 
 renderQuestions();
 
@@ -67,9 +87,9 @@ function generateRandom(min, max) {
 }
 
 var test = generateRandom(0, 3)
-console.log(test);
+// console.log(test);
 
 var correctIndex = Math.floor(Math.random() * 4);
-console.log(correctIndex);
+// console.log(correctIndex);
 
 });
