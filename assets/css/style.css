@@ -1,3 +1,23 @@
+.container {
+	margin: auto;
+	width: 70%;
+	text-align: center;
+	background-color: #a6baed
+}
+
+.answer-section{
+	padding: 0;
+}
+
+.dynamic-section {
+	background-color: #bfbfbf;
+}
+
 ul li:hover {
 	background-color: blue;
+}
+
+ul li {
+	/*background-color: #bfbfbf;*/
+	list-style: none;
 }

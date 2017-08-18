@@ -5,6 +5,7 @@ var correctAnswers = 0;
 var incorrectAnswers = 0;
 var questionsUnanswered = 0;
 var time = 30;
+var intervalId;
 var tempIndex = 0;
 var questionIndex = 0; //to know which question we should render
 var questions = [
@@ -31,16 +32,17 @@ var questions = [
 renderQuestion();
 
 function renderQuestion () {
+  timer();
   var newArray = [];
   newArray.push(questions[questionIndex].correctAnswer);
   newArray.push(questions[questionIndex].incorrectAnswer[0]);
   newArray.push(questions[questionIndex].incorrectAnswer[1]);
   newArray.push(questions[questionIndex].incorrectAnswer[2]);
-  // console.log(newArray);
-  newArray = shuffle(newArray); //shuffle array
-  // console.log(newArray);
+  newArray = shuffle(newArray); 
 
-  $('.answer-section').empty();
+  $('#question').text(questions[questionIndex].question);
+
+  $('.answer-section').empty(); //clear section before appending
 
   for (var i = 0; i < newArray.length; i++) {
 
@@ -69,25 +71,26 @@ function renderQuestion () {
       correctAnswers++;
       console.log('Correct Answers: ' + correctAnswers);
       questionIndex++;
-      if (questionIndex >= questions.length) {
-        console.log ("end of game screen");
-      }
-      else {
-        renderQuestion();
-      } 
+      //check if any questions remain
+      setTimeout(function(){endGame(); }, 1000);
     }
     else {
       incorrectAnswers++;
       console.log('Incorrect Answers: ' + incorrectAnswers);
       questionIndex++;
-      if (questionIndex >= questions.length) {
-        console.log ("end of game screen");
-      }
-      else {
-        renderQuestion();
-      } 
+      //check if any questions remain
+      setTimeout(function(){endGame(); }, 1000);
     }
   });
+}
+
+function endGame () {
+  if (questionIndex >= questions.length) {
+    console.log ("end of game screen with results");
+  }
+  else {
+    renderQuestion();
+  } 
 }
 
 //shuffle array function
@@ -110,11 +113,12 @@ function shuffle(array) {
   return array;
 }
 
-timer();
-
 //timer countdown from 30 at each question
 function timer () {
-    setInterval(function(){count(); }, 1000);
+  $('.timer').html('Time Remaining: ' + 30);
+  clearInterval(intervalId); //clear interval before restarting
+  time = 30; //reset time
+  intervalId = setInterval(function(){count(); }, 1000);
 }
 
 function count() {
@@ -123,7 +127,6 @@ function count() {
     $('.timer').html('Time Remaining: ' + time);
   }
 }
-
 
 //generate random number not including one already used
 function generateRandom(min, max) {
