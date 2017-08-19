@@ -1,14 +1,24 @@
+h1 {
+	padding-top: 40px;
+}
+
 button {
 	margin: 40px 0px 40px 0px;
 }
 
 img {
-	width: 90%;
+	max-width: 80%;
+
 }
 
 html, body {
 	height:90%;
 	background-color: #c6efd7;
+  font-family: Lato, Arial, "Times New Roman", Times, serif;
+}
+
+ul {
+	height: 30%;
 }
 
 ul li:hover {
@@ -19,10 +29,12 @@ ul li {
 	/*background-color: #bfbfbf;*/
 	list-style: none;
 	padding-top: 20px;
+	width: 50%;
+	margin: auto;
 }
 
 .container {
-	height: 100%;
+	height: 80%;
 	width: 70%;
 	margin: auto;
 	text-align: center;
@@ -36,4 +48,13 @@ ul li {
 
 .dynamic-section {
 	background-color: #bfbfbf;
+	height: 100%;
+}
+
+#question { 
+	padding-top: 100px;
+}
+
+.results:hover {
+	background-color: none;
 }

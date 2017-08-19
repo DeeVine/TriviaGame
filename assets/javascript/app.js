@@ -15,11 +15,11 @@ function questionObject(question, correctAnswer, incorrectAnswer, img) {
   this.img = img;
 }
 
-var question1 = new questionObject ("Which of the following sports is not part of the triathlon?", "Horse-riding", ["Cycling", "Swimming", "Running"], 'http://www.farandride.com/images/photos/new/63024.jpg')
-var question2 = new questionObject ("In what sport is a shuttlecock used?", "badminton", ["Table Tennis", "Rugby","Cricket"]);
-var question3 = new questionObject ("The Rio 2016 Summer Olympics held it's closing ceremony on what date?", "August 21", ["August 23", "August 19", "August 17"]);
-var question4 = new questionObject ("Which country will host the 2020 Summer Olympics?", "Japan", ["China", "Australia", "Germany"]);
-var question5 = new questionObject ("Which country is hosting the 2018 FIFA World Cup?", "Russia", ["Germany", "United States", "Saudi Arabia"]);
+var question1 = new questionObject ("Which of the following sports is not part of the triathlon?", "Horse-riding", ["Cycling", "Swimming", "Running"], "assets/images/horse.jpg")
+var question2 = new questionObject ("In what sport is a shuttlecock used?", "badminton", ["Table Tennis", "Rugby","Cricket"], "assets/images/badminton.jpg");
+var question3 = new questionObject ("The Rio 2016 Summer Olympics held it's closing ceremony on what date?", "August 21", ["August 23", "August 19", "August 17"], "assets/images/august21.jpg");
+var question4 = new questionObject ("Which country will host the 2020 Summer Olympics?", "Japan", ["China", "Australia", "Germany"], "assets/images/japan.jpg");
+var question5 = new questionObject ("Which country is hosting the 2018 FIFA World Cup?", "Russia", ["Germany", "United States", "Saudi Arabia"], "assets/images/russia.png");
 
 var questions = [question1, question2, question3, question4, question5]
 
@@ -97,14 +97,14 @@ function displayEndGame () {
   f.text('Start Over?');
   $('.dynamic-section').append(f);
 
-  $('.start-over').on('click', function() {
   //reset game
-  correctAnswers = 0;
-  incorrectAnswers = 0;
-  questionsUnanswered = 0;
-  time = 30;
-  questionIndex = 0;
-  renderQuestion();
+  $('.start-over').on('click', function() {
+    correctAnswers = 0;
+    incorrectAnswers = 0;
+    questionsUnanswered = 0;
+    time = 30;
+    questionIndex = 0;
+    renderQuestion();
   });
 }
 
@@ -262,10 +262,6 @@ function timer () {
   $('.timer').html('Time Remaining: ' + 30);
   time = 30; //reset time
   intervalId = setInterval(function(){count(); }, 1000);
-
-  // if (time = 0) {
-  //   console.log('you\'re out of time');
-  // }
 }
 
 function count() {
