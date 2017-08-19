@@ -7,26 +7,48 @@ var questionsUnanswered = 0;
 var time;
 var intervalId;
 var questionIndex = 0; //to know which question we should render
-var questions = [
-  {
-    'question': 'This is question #1',
-    'correctAnswer': 'This is the correct answer',
-    'incorrectAnswer': [
-       'incorrect1',
-       'incorrect2',
-       'incorrect3',
-    ]
-  },
-  {
-    'question': 'This is question #2',
-    'correctAnswer': 'This is the correct answer',
-    'incorrectAnswer': [
-       'incorrect1',
-       'incorrect2',
-       'incorrect3',
-    ]
-  }
-]; 
+
+function questionObject(question, correctAnswer, incorrectAnswer, img) {
+  this.question = question;
+  this.correctAnswer = correctAnswer;
+  this.incorrectAnswer = incorrectAnswer;
+  this.img = img;
+}
+
+var question1 = new questionObject ("Which of the following sports is not part of the triathlon?", "Horse-riding", ["Cycling", "Swimming", "Running"], 'http://www.farandride.com/images/photos/new/63024.jpg')
+var question2 = new questionObject ("In what sport is a shuttlecock used?", "badminton", ["Table Tennis", "Rugby","Cricket"]);
+var question3 = new questionObject ("The Rio 2016 Summer Olympics held it's closing ceremony on what date?", "August 21", ["August 23", "August 19", "August 17"]);
+var question4 = new questionObject ("Which country will host the 2020 Summer Olympics?", "Japan", ["China", "Australia", "Germany"]);
+var question5 = new questionObject ("Which country is hosting the 2018 FIFA World Cup?", "Russia", ["Germany", "United States", "Saudi Arabia"]);
+
+var questions = [question1, question2, question3, question4, question5]
+
+// var questions = [
+//   question1,
+//   {
+//     'question': 'This is question #1',
+//     'correctAnswer': 'This is the correct answer',
+//     'incorrectAnswer': [
+//        'incorrect1',
+//        'incorrect2',
+//        'incorrect3',
+//     ]
+//   },
+//   {
+//     'question': 'This is question #2',
+//     'correctAnswer': 'This is the correct answer',
+//     'incorrectAnswer': [
+//        'incorrect1',
+//        'incorrect2',
+//        'incorrect3',
+//     ]
+//   }
+// ]; 
+
+
+
+console.log(question1);
+console.log(questions);
 
 gameStart();
 
@@ -96,7 +118,7 @@ function displayCorrectAnswer () {
   $('.dynamic-section').append(a);
 
   var c = $('<img>');
-  c.attr('src', 'http://www.phonebrain.org.uk/assets/img/quiz/correct-male.png')  
+  c.attr('src', questions[questionIndex].img)  
   $('.dynamic-section').append(c);
 }
 
@@ -115,7 +137,7 @@ function displayWrongAnswer () {
   $('.dynamic-section').append(b);
 
   var c = $('<img>');
-  c.attr('src', 'http://www.phonebrain.org.uk/assets/img/quiz/correct-male.png')  
+  c.attr('src', questions[questionIndex].img)  
   $('.dynamic-section').append(c);
 }
 
@@ -133,7 +155,7 @@ function displayOutOfTime () {
   $('.dynamic-section').append(b);
 
   var c = $('<img>');
-  c.attr('src', 'http://www.phonebrain.org.uk/assets/img/quiz/correct-male.png')  
+  c.attr('src', questions[questionIndex].img)  
   $('.dynamic-section').append(c);
 }
 
@@ -191,7 +213,7 @@ function renderQuestion () {
       displayCorrectAnswer();
       questionIndex++;
       //check if any questions remain
-      setTimeout(function(){endGame(); }, 2000);
+      setTimeout(function(){endGame(); }, 3000);
     }
     else {
       clearInterval(intervalId); //stop timer
@@ -200,7 +222,7 @@ function renderQuestion () {
       displayWrongAnswer();
       questionIndex++;
       //check if any questions remain
-      setTimeout(function(){endGame(); }, 2000);
+      setTimeout(function(){endGame(); }, 3000);
     }
   });
 }
@@ -259,7 +281,7 @@ function count() {
     displayOutOfTime();
     questionIndex++;
     //check if any questions remain
-    setTimeout(function(){endGame(); }, 2000);
+    setTimeout(function(){endGame(); }, 3000);
   }
 }
 
