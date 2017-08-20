@@ -2,17 +2,47 @@ h1 {
 	padding-top: 40px;
 }
 
-button {
-	margin: 40px 0px 40px 0px;
+h1, .timer {
+	color: wheat;
+}
+
+.btn {
+  margin-top:10%;
+  background: #00cc0a;
+  background-image: -webkit-linear-gradient(top, #00cc0a, #008507);
+  background-image: -moz-linear-gradient(top, #00cc0a, #008507);
+  background-image: -ms-linear-gradient(top, #00cc0a, #008507);
+  background-image: -o-linear-gradient(top, #00cc0a, #008507);
+  background-image: linear-gradient(to bottom, #00cc0a, #008507);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border: solid 1px;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 30px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #00ba03;
+  background-image: -webkit-linear-gradient(top, #00ba03, #006303);
+  background-image: -moz-linear-gradient(top, #00ba03, #006303);
+  background-image: -ms-linear-gradient(top, #00ba03, #006303);
+  background-image: -o-linear-gradient(top, #00ba03, #006303);
+  background-image: linear-gradient(to bottom, #00ba03, #006303);
+  text-decoration: none;
 }
 
 img {
-	max-width: 60%;
+
+max-height: 75%;
 
 }
 
 html, body {
-	height:90%;
+	height:95%;
   font-family: Lato, Arial, "Times New Roman", Times, serif;
 }
 
@@ -21,15 +51,17 @@ ul {
 }
 
 ul li:hover {
-	background-color: blue;
+	background-color: #25aeff;
 }
 
 ul li {
 	/*background-color: #bfbfbf;*/
 	list-style: none;
-	padding-top: 20px;
+	vertical-align: middle;
 	width: 50%;
 	margin: auto;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	border-radius: 5px;
 	font-size: 20px;
 	line-height: 30px;
@@ -40,7 +72,14 @@ ul li {
 	width: 70%;
 	margin: auto;
 	text-align: center;
-	background-color: #a6baed
+	background-color: #3f4156;
+	border-radius: 15px;
+}
+
+.correct-answer, .wrong, .done {
+
+	padding-top: 20px;
+
 }
 
 .answer-section, .results-section{
@@ -49,7 +88,9 @@ ul li {
 }
 
 .dynamic-section {
-	background-color: #bfbfbf;
+	background-color: #76e899;
+	border-bottom-right-radius: 15px; 
+	border-bottom-left-radius: 15px;
 	height: 100%;
 }
 

@@ -29,7 +29,7 @@ gameStart();
 //start game
 function gameStart () {
   var a = $('<button>');
-  a.addClass('game-start');
+  a.addClass('game-start btn');
   a.text('Start');
   $('.dynamic-section').append(a);
 
@@ -67,7 +67,7 @@ function displayEndGame () {
   $('.results-section').append(e);
 
   var f = $('<button>');
-  f.addClass('start-over');
+  f.addClass('start-over btn');
   f.text('Start Over?');
   $('.dynamic-section').append(f);
 
@@ -106,7 +106,7 @@ function displayWrongAnswer () {
   $('.dynamic-section').append(a);
 
   var b = $('<p>');
-  b.addClass('the-correct-answer');
+  b.addClass('the-wrong-answer');
   b.text('The Correct Answer Was: ' + questions[questionIndex].correctAnswer);
   $('.dynamic-section').append(b);
 
@@ -119,12 +119,12 @@ function displayOutOfTime () {
   $('.dynamic-section').empty();
 
   var a = $('<p>');
-  a.addClass('out-of-time');
+  a.addClass('wrong');
   a.text('Out Of Time!')
   $('.dynamic-section').append(a);
 
   var b = $('<p>');
-  b.addClass('the-correct-answer');
+  b.addClass('the-wrong-answer');
   b.text('The Correct Answer Was: ' + questions[questionIndex].correctAnswer);
   $('.dynamic-section').append(b);
 
