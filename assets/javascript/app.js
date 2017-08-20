@@ -15,6 +15,7 @@ function questionObject(question, correctAnswer, incorrectAnswer, img) {
   this.img = img;
 }
 
+//create questions
 var question1 = new questionObject ("Which of the following sports is not part of the triathlon?", "Horse-riding", ["Cycling", "Swimming", "Running"], "assets/images/horse.jpg")
 var question2 = new questionObject ("In what sport is a shuttlecock used?", "badminton", ["Table Tennis", "Rugby","Cricket"], "assets/images/badminton.jpg");
 var question3 = new questionObject ("The Rio 2016 Summer Olympics held it's closing ceremony on what date?", "August 21", ["August 23", "August 19", "August 17"], "assets/images/august21.jpg");
@@ -22,33 +23,6 @@ var question4 = new questionObject ("Which country will host the 2020 Summer Oly
 var question5 = new questionObject ("Which country is hosting the 2018 FIFA World Cup?", "Russia", ["Germany", "United States", "Saudi Arabia"], "assets/images/russia.png");
 
 var questions = [question1, question2, question3, question4, question5]
-
-// var questions = [
-//   question1,
-//   {
-//     'question': 'This is question #1',
-//     'correctAnswer': 'This is the correct answer',
-//     'incorrectAnswer': [
-//        'incorrect1',
-//        'incorrect2',
-//        'incorrect3',
-//     ]
-//   },
-//   {
-//     'question': 'This is question #2',
-//     'correctAnswer': 'This is the correct answer',
-//     'incorrectAnswer': [
-//        'incorrect1',
-//        'incorrect2',
-//        'incorrect3',
-//     ]
-//   }
-// ]; 
-
-
-
-console.log(question1);
-console.log(questions);
 
 gameStart();
 
@@ -185,18 +159,13 @@ function renderQuestion () {
 
   for (var i = 0; i < newArray.length; i++) {
 
-    //checks if correct answer is in the same index and skips ahead 1 index
-    console.log(newArray[i]);
-
     if (newArray[i] === questions[questionIndex].correctAnswer) {
-      console.log("successfully targetted correct answer");
       var a = $('<li>');
       a.addClass('correctAnswer');
       a.text(newArray[i]);
       $('.answer-section').append(a);
     }
     else{
-      console.log("this is the wrong answer");
       var a = $('<li>');
       a.addClass('incorrectAnswer');
       a.text(newArray[i]);
@@ -209,7 +178,6 @@ function renderQuestion () {
     if ($(this).attr('class') === 'correctAnswer') {
       clearInterval(intervalId); //stop timer
       correctAnswers++;
-      console.log('Correct Answers: ' + correctAnswers);
       displayCorrectAnswer();
       questionIndex++;
       //check if any questions remain
@@ -218,7 +186,6 @@ function renderQuestion () {
     else {
       clearInterval(intervalId); //stop timer
       incorrectAnswers++;
-      console.log('Incorrect Answers: ' + incorrectAnswers);
       displayWrongAnswer();
       questionIndex++;
       //check if any questions remain
@@ -264,6 +231,7 @@ function timer () {
   intervalId = setInterval(function(){count(); }, 1000);
 }
 
+//maintain time and check if time has run out
 function count() {
   if (time > 0) {
     time--;

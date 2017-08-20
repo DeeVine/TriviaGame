@@ -7,13 +7,12 @@ button {
 }
 
 img {
-	max-width: 80%;
+	max-width: 60%;
 
 }
 
 html, body {
 	height:90%;
-	background-color: #c6efd7;
   font-family: Lato, Arial, "Times New Roman", Times, serif;
 }
 
@@ -31,6 +30,9 @@ ul li {
 	padding-top: 20px;
 	width: 50%;
 	margin: auto;
+	border-radius: 5px;
+	font-size: 20px;
+	line-height: 30px;
 }
 
 .container {
@@ -52,7 +54,9 @@ ul li {
 }
 
 #question { 
-	padding-top: 100px;
+	padding-top: 60px;
+	font-size:20px;
+	font-weight: bold;
 }
 
 .results:hover {
