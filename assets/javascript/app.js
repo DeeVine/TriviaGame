@@ -20,7 +20,7 @@ var question1 = new questionObject ("Which of the following sports is not part o
 var question2 = new questionObject ("In what sport is a shuttlecock used?", "badminton", ["Table Tennis", "Rugby","Cricket"], "assets/images/badminton.jpg");
 var question3 = new questionObject ("The Rio 2016 Summer Olympics held it's closing ceremony on what date?", "August 21", ["August 23", "August 19", "August 17"], "assets/images/august21.jpg");
 var question4 = new questionObject ("Which country will host the 2020 Summer Olympics?", "Japan", ["China", "Australia", "Germany"], "assets/images/japan.jpg");
-var question5 = new questionObject ("Which country is hosting the 2018 FIFA World Cup?", "Russia", ["Germany", "United States", "Saudi Arabia"], "assets/images/russia.png");
+var question5 = new questionObject ("Which country is hosting the 2018 FIFA World Cup?", "Russia", ["Germany", "United States", "Saudi Arabia"], "assets/images/russia.jpg");
 
 var questions = [question1, question2, question3, question4, question5]
 
